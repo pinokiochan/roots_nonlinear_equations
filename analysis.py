@@ -24,9 +24,10 @@ def create_comparison_table(methods, roots, iterations_counts, true_root):
 def print_detailed_analysis(df):
     print(df.to_string(index=False))
     print("\nDetailed Analysis:")
-    best_method = df.iloc[0]['Method']
-    worst_method = df.iloc[-1]['Method']
+    
+   
+    best_method = df.loc[df['Iterations'].idxmin()]['Method'] 
+    worst_method = df.loc[df['Iterations'].idxmax()]['Method'] 
+    
     print(f"Best performing method: {best_method}")
     print(f"Worst performing method: {worst_method}")
-    print(f"Average number of iterations: {df['Iterations'].mean():.2f}")
-    print(f"Range of absolute errors: {df['Absolute Error'].min():.2e} to {df['Absolute Error'].max():.2e}")
