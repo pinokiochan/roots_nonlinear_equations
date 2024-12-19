@@ -101,4 +101,3 @@ def muller(f, x0, x1, x2, tol=1e-6, max_iter=100):
         x0, x1, x2 = x1, x2, x3
     
     raise ValueError("Method did not converge")
-

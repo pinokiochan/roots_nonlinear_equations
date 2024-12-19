@@ -35,4 +35,3 @@ def plot_convergence(iterations_list, method_names):
     plt.grid(True)
     plt.savefig('convergence.png')
     plt.close()
-

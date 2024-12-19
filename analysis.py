@@ -30,4 +30,3 @@ def print_detailed_analysis(df):
     print(f"Worst performing method: {worst_method}")
     print(f"Average number of iterations: {df['Iterations'].mean():.2f}")
     print(f"Range of absolute errors: {df['Absolute Error'].min():.2e} to {df['Absolute Error'].max():.2e}")
-

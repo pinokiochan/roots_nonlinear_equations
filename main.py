@@ -1,6 +1,6 @@
-from formulas import f1, f2, f3, f4, f5, f6, df1, df2, df3, df4, df5, df6
+from functions import f1, f2, f3, f4, f5, f6, df1, df2, df3, df4, df5, df6
 from methods import bisection, secant, newton_raphson, false_position, muller
-from graphmaker import plot_function_and_roots, plot_convergence
+from visualization import plot_function_and_roots, plot_convergence
 from analysis import create_comparison_table, print_detailed_analysis
 
 def find_interval(f, start=0.1, step=0.1, max_iterations=1000):
@@ -9,13 +9,13 @@ def find_interval(f, start=0.1, step=0.1, max_iterations=1000):
         try:
             if f(a) * f(b) < 0:
                 return a, b
-            if f(a) * f(b) == 0:  # If either a or b is a root
+            if f(a) * f(b) == 0: 
                 return (a, b) if f(a) == 0 else (b, a)
         except ValueError:
-            pass  # Skip over domain errors
+            pass  
         a, b = b, b + step
     
-    # If no sign change is found, return an interval containing the minimum
+    
     a, b = start, start + step
     min_val, min_point = float('inf'), a
     for _ in range(max_iterations):
@@ -23,7 +23,7 @@ def find_interval(f, start=0.1, step=0.1, max_iterations=1000):
             if f(b) < min_val:
                 min_val, min_point = f(b), b
         except ValueError:
-            pass  # Skip over domain errors
+            pass  
         a, b = b, b + step
     return min_point - step, min_point + step
 
@@ -31,11 +31,11 @@ def analyze_function(f, df, true_root, function_name):
     print(f"\nAnalyzing function: {function_name}")
     
     try:
-        # Find suitable interval for bisection and false position methods
+        
         a, b = find_interval(f)
         x0, x1, x2 = a, (a + b) / 2, b
 
-        # Apply methods
+      
         methods = ['Bisection', 'Secant', 'Newton-Raphson', 'False Position', 'Muller']
         roots = []
         all_iterations = []
@@ -60,11 +60,11 @@ def analyze_function(f, df, true_root, function_name):
         roots.append(root_muller)
         all_iterations.append(iter_muller)
 
-        # Plotting
+        
         plot_function_and_roots(f, roots, methods, (a, b))
         plot_convergence(all_iterations, methods)
 
-        # Analysis
+        
         iterations_counts = [len(iterations) for iterations in all_iterations]
         comparison_table = create_comparison_table(methods, roots, iterations_counts, true_root)
         print_detailed_analysis(comparison_table)
@@ -87,4 +87,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
